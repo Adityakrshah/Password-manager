@@ -132,7 +132,7 @@ venv.bak/
 
 #private stuff
 *.key
-*.txt
+pass*.txt
 
 # Spyder project settings
 .spyderproject
