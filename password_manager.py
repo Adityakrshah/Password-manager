@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+import os
 
 
 def write_key():
@@ -14,8 +15,14 @@ def load_key():
     file.close()
     return key
 
+key = None
 #write_key()
-key= load_key()
+if(os.path.exists("key.key")):
+    key= load_key()
+else: 
+    write_key()
+    key= load_key()
+
 fer=Fernet(key)
 
 master =input("PLEASE TYPE MASTER PASSWORD:")
@@ -28,8 +35,8 @@ def view():
         for line in f.readlines():
             data=line.rstrip()
             user,passw=data.split("||")
-            print("user:",user,"passw:",passw)
-            fer.decrypt(passw.encode()).decode()
+            p = fer.decrypt(passw.encode()).decode()
+            print("user:",user,"passw:",p)
             
 def add():
     acc_name=input("Enter Account name:")
